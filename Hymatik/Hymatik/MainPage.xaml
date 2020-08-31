@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hymatik.MainPage">
 
@@ -23,6 +24,7 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+           
             <ColumnDefinition Width="5,5*"/>
             <ColumnDefinition Width="*"/>
 
@@ -41,13 +43,13 @@
         <Editor  Placeholder="Order" PlaceholderColor="#0066ff" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></Editor>
 
         <Button Text="Send" TextColor="#0066ff" Grid.Row="10" Grid.Column="0" Clicked="Button_Clicked"></Button>
-        
+
 
         <Image Source="ParkerStore_logo_Main.png" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="Center"></Image>
 
 
     </Grid>
-    
-    
-    
+
+
+
 </ContentPage>
