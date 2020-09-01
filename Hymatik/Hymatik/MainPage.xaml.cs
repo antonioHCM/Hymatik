@@ -42,7 +42,7 @@ namespace Hymatik
             document.Close(true);
 
             //Save the stream as a file in the device and invoke it for viewing
-            Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("Output.pdf", "application / pdf", stream);
+            _ = Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("Output.pdf", "application/pdf", stream);
 
 
             DisplayAlert("Warnning", "Your order has been sent to Hymatik", "Ok");
