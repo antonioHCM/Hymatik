@@ -7,17 +7,47 @@ using Syncfusion.Pdf.Grid;
 using System.IO;
 using Syncfusion.Drawing;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Net;
 
 namespace Hymatik
 {
     public partial class MainPage : ContentPage
     {
+        public static string root = "";
+
 
         public MainPage()
         {
             InitializeComponent();
         }
 
+        private void Sendemail(MemoryStream memoryStream)
+        {
+            try
+            {
+
+                //Mail Body
+                MailMessage message = new MailMessage();
+                message.To.Add("hymatikorders@gmail.com");
+                message.From = new MailAddress("hymatikorders@gmail.com");
+                message.Subject = "Orders from mobile app";
+                Attachment attachment = new Attachment(root + @"/Output.pdf");//memoryStream, MediaTypeNames.Application.Pdf);
+                message.Attachments.Add(attachment);
+                message.Body = "";
+
+                SmtpClient mailClient = new SmtpClient("smtp.gmail.com");
+                mailClient.Port = 587;
+                mailClient.EnableSsl = true;
+                mailClient.Credentials = new NetworkCredential("hymatikorders@gmail.com", "marketing123.");
+
+                mailClient.Send(message);
+            }
+            catch (Exception e) { }
+
+
+        }
         private void Button_Clicked(object sender, EventArgs e)
         {
 
@@ -57,6 +87,7 @@ namespace Hymatik
 
             //Save the stream as a file in the device and invoke it for viewing
             Task generatingDoc = Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("Output.pdf", "application/pdf", stream);
+            Sendemail(stream);
 
             while (generatingDoc.Status != TaskStatus.RanToCompletion)
             {
@@ -68,12 +99,6 @@ namespace Hymatik
             //DisplayAlert("Warnning", "Your order has been sent to Hymatik", "Ok");
         }
 
-        //protected class InputedValues
-        //{
-        //    private long? _clientNumber;
-        //    private long? _phoneNumber;
-        //    private string _company;
-        //    private string _cvrnumber;
 
 
 
